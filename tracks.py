@@ -83,12 +83,11 @@ for entry in all:
 
     if genre is None :
         cur.execute('''INSERT OR IGNORE INTO GENRE("No Genre"))
+        cur.execute('SELECT id from Genre where name = "No Genre"')
     else:
-        cur.execute(''' ''')
+        cur.execute('''INSERT OR IGNORE INTO GENRE (name) VALUES (?)''', (genre, ))
+        cur.execute('SELECT id from Genre where name = ?', (genre, ))
 
-    cur.execute('''INSERT OR IGNORE INTO GENRE (name) VALUES (?)''', (genre, ))
-
-    cur.execute('SELECT id from Genre where name = ?', (genre, ))
     genre_id = cur.fetchone()[0]
 
     cur.execute('''INSERT OR REPLACE INTO Track
