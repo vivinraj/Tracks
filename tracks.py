@@ -81,15 +81,8 @@ for entry in all:
     cur.execute('SELECT id FROM Album WHERE title = ? ', (album, ))
     album_id = cur.fetchone()[0]
 
-    if genre is None :
-        print(cur.execute('''SELECT name from Artist'''))
-        cur.execute('''INSERT OR IGNORE INTO GENRE("No Genre"))
-        cur.execute('SELECT id from Genre where name = "No Genre"')
-    else:
-        print(cur.execute('''SELECT name from Artist'''))
-        cur.execute('''INSERT OR IGNORE INTO GENRE (name) VALUES (?)''', (genre, ))
-        cur.execute('SELECT id from Genre where name = ?', (genre, ))
-
+    cur.execute('''INSERT OR IGNORE INTO GENRE (name) VALUES (?)''', (genre, ))
+    cur.execute('SELECT id from Genre where name = ?', (genre, ))
     genre_id = cur.fetchone()[0]
 
     cur.execute('''INSERT OR REPLACE INTO Track
